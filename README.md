@@ -6,7 +6,10 @@ En este juego encontramos los siguientes patrones de diseño:
 Observa los **cambios de estado** que tenga un sujeto u objeto para notificar sus suscripciones.
 Para este juego el sujeto u objeto que es el **BallGamer** y se suscribe a las **BallFood.** 
 
-
+## 2. Patron Prototipo
+Observa los **cambios de estado** que tenga un sujeto u objeto para notificar sus suscripciones.
+Para este juego el sujeto u objeto que es el **BallGamer** y se suscribe a las **BallFood.** 
+## 3. 
 
 Factory: Forma de creación de bolas enemigas (Aleatoria, dependiendo del nivel...)
 Memento: Cuando estoy en un puntaje determinado y me comen puedo volver al estado (Check point)
