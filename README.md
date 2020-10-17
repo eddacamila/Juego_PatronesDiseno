@@ -18,6 +18,8 @@ Para este juego el sujeto u objeto que es el **BallGamer** y se suscribe a las *
 
 ### Diagrama Patrón Singleton
 
+![Diagrama Clases-Singleton](imagenes/DiagramaClasesJuegoPython-Observador.png)
+
 ## 3. Patrón Mediator :speech_balloon:
 
 Factory: Forma de creación de bolas enemigas (Aleatoria, dependiendo del nivel...)
