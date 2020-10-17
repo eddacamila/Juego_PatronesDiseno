@@ -11,16 +11,23 @@ Este Patrón se usa para detectar la colisión, generando que se reubique BallFo
 ### Diagrama Patrón Observer
 
 
-## 2. Patron Prototipo
+## 2. Patrón Singleton :walking:
 Observa los **cambios de estado** que tenga un sujeto u objeto para notificar sus suscripciones.
 Para este juego el sujeto u objeto que es el **BallGamer** y se suscribe a las **BallFood.** 
-## 3. 
+### Según esto tenemos en el código:
+
+### Diagrama Patrón Singleton
+
+## 3. Patrón Mediator :speech_balloon:
 
 Factory: Forma de creación de bolas enemigas (Aleatoria, dependiendo del nivel...)
 Memento: Cuando estoy en un puntaje determinado y me comen puedo volver al estado (Check point)
 Prototype: Clonación de de enemigos
 Mediator: Informar el score, decoración y ambiente
 
+### Según esto tenemos en el código:
+
+### Diagrama Patrón Mediator
 
 ## Bibliografía
 https://anexsoft.com/patron-observador-con-javascript-observer-pattern
