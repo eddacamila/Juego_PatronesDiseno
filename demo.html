@@ -1,0 +1,50 @@
+<html>
+    <body>
+
+        <canvas id="myCanvas" width="200" height="137" style="border:1px solid #000000;"></canvas>
+
+        <script>
+            const canvas = document.getElementById('myCanvas');
+            const context = canvas.getContext('2d');
+
+            class Blob {
+                constructor(color, size){ //this is your init
+                    this.x = Math.random() * canvas.width
+                    this.y = Math.random() * canvas.height
+                    this.color = color
+                    this.size = size
+                    this.xChange = 2;
+                    this.yChange = 2;
+                }
+
+                move(){
+                    if(this.x >= canvas.width || this.x <= 0){
+                        this.xChange *= -1
+                      }
+
+                    if(this.y >= canvas.height || this.y <= 0){
+                        this.yChange *= -1
+                      }
+
+                    this.x += this.xChange;
+                    this.y += this.yChange;
+                }
+
+                //dont wanna clear per blob draw.
+                draw(){
+                    context.beginPath();
+                    context.arc(this.x, this.y,this.size, 0, 2*Math.PI);
+                    context.fillStyle = this.color;
+                    context.fill();
+                    context.stroke();
+                }
+            }
+
+            const newBlob = new Blob("green",25)
+            newBlob.draw();
+            newBlob.move();
+            newBlob.draw(); // ...etc.
+
+        </script>
+    </body>
+</html>
