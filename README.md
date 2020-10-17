@@ -35,12 +35,10 @@ Informa el score desde el mediador, que seria la clase **BallGame** a la clase *
 
 ![Diagrama Clases-Mediator](imagenes/DiagramaClasesJuegoPython-Mediador.png)
 
-## Bibliografía
+## Bibliografía :green_book:
 https://anexsoft.com/patron-observador-con-javascript-observer-pattern
 
-## Autores
+## Autores ✒️
 
-Nestor Camilo Beltrán
-
-Edda Camila Rodríguez 
-
+Edda Camila Rodrigez - 20202099033 :woman:
+Néstor Camilo Beltrán - 20202099021 :older_man:
