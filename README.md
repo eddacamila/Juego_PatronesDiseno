@@ -1,4 +1,4 @@
-# Fat Ball o Monstruo come circulos.
+# Fat Ball o Monstruo come circulos. :basketball:
 Ejemplo de aplicación de patrones de diseño a un juego muy básico.
 En este juego encontramos los siguientes patrones de diseño:
 
