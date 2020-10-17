@@ -7,7 +7,7 @@ Con esta sencilla aplicación de Javascript, te enfrentas a otros monstruos come
 
 ### Diagrama general de clases
 
-![Diagrama Clases-JuegoComeCirculos](DiagramaClasesJuegoPython-DiagramaFinal.png)
+![Diagrama Clases-JuegoComeCirculos](imagenes/DiagramaClasesJuegoPython-DiagramaFinal.png)
 
 ## 1. Patrón Observer :eyes:
 Observa los **cambios de estado** que tenga un **sujeto u objeto** para notificar sus suscripciones.
@@ -25,7 +25,7 @@ Restringe la creación de objetos de la clase **Game**, porque hay una única cl
 
 ### Diagrama Patrón Singleton
 
-![Diagrama Clases-Singleton](DiagramaClasesJuegoPython-Singleton.png)
+![Diagrama Clases-Singleton](imagenes/DiagramaClasesJuegoPython-Singleton.png)
 
 ## 3. Patrón Mediator :speech_balloon:
 Informa el score desde el mediador, que seria la clase **BallGame** a la clase **Game** para que esta presente la información.
@@ -33,7 +33,7 @@ Informa el score desde el mediador, que seria la clase **BallGame** a la clase *
 
 ### Diagrama Patrón Mediator
 
-![Diagrama Clases-Mediator](DiagramaClasesJuegoPython-Mediador.png)
+![Diagrama Clases-Mediator](imagenes/DiagramaClasesJuegoPython-Mediador.png)
 
 ## Bibliografía
 https://anexsoft.com/patron-observador-con-javascript-observer-pattern
