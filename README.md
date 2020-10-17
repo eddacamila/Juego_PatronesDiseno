@@ -41,5 +41,6 @@ https://anexsoft.com/patron-observador-con-javascript-observer-pattern
 ## Autores
 
 Nestor Camilo Beltrán
+
 Edda Camila Rodríguez 
 
