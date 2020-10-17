@@ -6,7 +6,9 @@ Con esta sencilla aplicación de Javascript, te enfrentas a otros monstruos come
 ## Código general-imagen de contexto
 
 ### Diagrama general de clases
+
 ![Diagrama Clases-JuegoComeCirculos](DiagramaClasesJuegoPython-DiagramaFinal.png)
+
 ## 1. Patrón Observer :eyes:
 Observa los **cambios de estado** que tenga un **sujeto u objeto** para notificar sus suscripciones.
 Para este juego el objeto **BallFood** (Bola-comida) **se suscribe a las BallGamer**(Bola del jugador).  
@@ -14,6 +16,7 @@ Este Patrón se usa para detectar la colisión, generando que se reubique BallFo
 ### Según esto tenemos en el código:
 
 ### Diagrama Patrón Observer
+
 ![Diagrama Clases-Observer](imagenes/DiagramaClasesJuegoPython-Observador.png)
 
 ## 2. Patrón Singleton :walking:
@@ -31,6 +34,7 @@ Informa el score desde el mediador, que seria la clase **BallGame** a la clase *
 ### Diagrama Patrón Mediator
 
 ![Diagrama Clases-Mediator](DiagramaClasesJuegoPython-Mediador.png)
+
 ## Bibliografía
 https://anexsoft.com/patron-observador-con-javascript-observer-pattern
 
