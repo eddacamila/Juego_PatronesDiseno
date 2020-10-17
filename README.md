@@ -1,6 +1,13 @@
 # Fat Ball o Monstruo come circulos. :basketball:
 Ejemplo de aplicación de patrones de diseño a un juego muy básico.
 En este juego encontramos los siguientes patrones de diseño:
+## Contexto del Juego
+Con esta sencilla aplicación de Javascript, te enfrentas a otros monstruos come circulos. La regla es que si tienes un tamaño mayor que el circulo con el que chocas, eres el depredador, pero si es al reves eres la presa de ese depredador. La regla es: te comes a los más pequeños que tú, pero los más grandes que tú tienen derecho a comerte. En este caso usaras las teclas para moverte.
+## Código general-imagen de contexto
+
+### Diagrama general de clases
+
+![Diagrama Clases-JuegoComeCirculos](imagenes/DiagramaClasesJuegoPython-DiagramaFinal.png)
 
 ## 1. Patrón Observer :eyes:
 Observa los **cambios de estado** que tenga un **sujeto u objeto** para notificar sus suscripciones.
@@ -10,25 +17,28 @@ Este Patrón se usa para detectar la colisión, generando que se reubique BallFo
 
 ### Diagrama Patrón Observer
 
+![Diagrama Clases-Observer](imagenes/DiagramaClasesJuegoPython-Observador.png)
 
 ## 2. Patrón Singleton :walking:
-Observa los **cambios de estado** que tenga un sujeto u objeto para notificar sus suscripciones.
-Para este juego el sujeto u objeto que es el **BallGamer** y se suscribe a las **BallFood.** 
+Restringe la creación de objetos de la clase **Game**, porque hay una única clase-objeto juego. De este nos interesa el Stage o escenario.Que tiene la información de ancho, alto del cuadro de juego, la cuenta regresiva, el score, además necesitamos el inicio y finalizacion del juego.
 ### Según esto tenemos en el código:
 
 ### Diagrama Patrón Singleton
 
+![Diagrama Clases-Singleton](imagenes/DiagramaClasesJuegoPython-Singleton.png)
+
 ## 3. Patrón Mediator :speech_balloon:
-
-Factory: Forma de creación de bolas enemigas (Aleatoria, dependiendo del nivel...)
-Memento: Cuando estoy en un puntaje determinado y me comen puedo volver al estado (Check point)
-Prototype: Clonación de de enemigos
-Mediator: Informar el score, decoración y ambiente
-
+Informa el score desde el mediador, que seria la clase **BallGame** a la clase **Game** para que esta presente la información.
 ### Según esto tenemos en el código:
 
 ### Diagrama Patrón Mediator
 
-## Bibliografía
+![Diagrama Clases-Mediator](imagenes/DiagramaClasesJuegoPython-Mediador.png)
+
+## Bibliografía :green_book:
 https://anexsoft.com/patron-observador-con-javascript-observer-pattern
 
+## Autores ✒️
+
+Edda Camila Rodrigez - 20202099033 :woman:
+Néstor Camilo Beltrán - 20202099021 :older_man:
