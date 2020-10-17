@@ -2,10 +2,14 @@
 Ejemplo de aplicación de patrones de diseño a un juego muy básico.
 En este juego encontramos los siguientes patrones de diseño:
 
-## 1. Patrón Observer
+## 1. Patrón Observer :eyes:
 Observa los **cambios de estado** que tenga un **sujeto u objeto** para notificar sus suscripciones.
-Para este juego el sujeto u objeto **BallFood** (Bola-comida) **se suscribe a las BallGamer**(Bola del jugador).  
-Este Patrón se usa para detectar la colisión, generando que se reubique la comida y que se incremente el radio del BallGamer.
+Para este juego el objeto **BallFood** (Bola-comida) **se suscribe a las BallGamer**(Bola del jugador).  
+Este Patrón se usa para detectar la colisión, generando que se reubique BallFood (comida) y que se incremente el radio del BallGamer.
+### Según esto tenemos en el código:
+
+### Diagrama Patrón Observer
+
 
 ## 2. Patron Prototipo
 Observa los **cambios de estado** que tenga un sujeto u objeto para notificar sus suscripciones.
@@ -18,6 +22,6 @@ Prototype: Clonación de de enemigos
 Mediator: Informar el score, decoración y ambiente
 
 
-##Bibliografía
+## Bibliografía
 https://anexsoft.com/patron-observador-con-javascript-observer-pattern
 
