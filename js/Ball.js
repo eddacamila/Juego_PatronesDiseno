@@ -1,5 +1,12 @@
 class Ball {
-
+  /**
+   * 
+   * @param {Stage} stageB
+   * @param {object{x,y}} speed
+   * @param {string} color
+   * @param {int} radius
+   * @returns {Ball}
+   */
   constructor(stageB, speed, color , radius ) {
 
     var Xmax = stageB.width - radius;
@@ -99,20 +106,25 @@ class Ball {
     
   }
 
+  /**
+   * Draw the ball
+   * 
+   */
   draw () {
-//    console.debug('Entra');
     this.stageB.context.beginPath();
     var currentR = this.radius;
     this.stageB.context.fillStyle = this.color;
 
-
-  //  context.fillRect(x, y, sideLength, sideLength);
     // Draws a circle of radius 20 at the coordinates 100,100 on the canvas
     this.stageB.context.arc(this.x, this.y, currentR, 0, Math.PI*2, true);
     this.stageB.context.closePath();
     this.stageB.context.fill();
   }
 
+  /**
+   * Validate the collition
+   * 
+   */
   collide (x, y, radius) {
 
    // Collide with the target
@@ -127,7 +139,10 @@ class Ball {
     return false;
   }
 
-
+  /**
+   * Move the ball by random cordenates
+   * 
+   */
   moveRandom() {
     var Xmax = this.stageB.width - this.radius;
     var Ymax = this.stageB.height - this.radius;
@@ -138,6 +153,10 @@ class Ball {
     console.debug([this.x, this.y]);
   }
   
+  /**
+   * Get a collor in HEX by random
+   * @returns {String}
+   */
   getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';

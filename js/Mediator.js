@@ -1,15 +1,26 @@
+/**
+ * Implement to pattern Mediator, for communication between all balls
+ * 
+ */
 class Mediator {
   
   constructor() {
     this.participants = [];
   }
 
+/**
+ * Set a participant to array participats
+ * @param {objet} participant
+ */
   register(participant) {
-//    console.debug(participant);
       this.participants.push(participant);
       participant.mediator = this;
   }
   
+  /**
+ * Set many participants to array participats
+ * @param {array} participants
+ */
   registerMany(participants) {
     
     for ( var participant in participants) { 
@@ -18,6 +29,13 @@ class Mediator {
     }
   }
   
+  /**
+   * Report to alll participants a message from anoter participants.
+   * @param {int} x
+   * @param {int} y
+   * @param {Ball} from
+   * @param {Ball} to
+   */
   report(x, y, from, to) {
     if (to) {                      // single message
         to.receive(x, y, from);    

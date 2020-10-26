@@ -1,7 +1,13 @@
 //Singlenton
 class Game {
   
-  constructor(stageG, countdown = 60) {
+  /**
+   * 
+   * @param {Stage} stageG
+   * @param {int} countdown
+   * @returns {Game.constructor|Game|Game.instance}
+   */
+  constructor(stageG, countdown = 30) {
     this.stageG = stageG;
     this.score = 0;
     this.countdown = countdown;
@@ -17,7 +23,10 @@ class Game {
     return this;
   }
   
-    // Show the start menu
+  /**
+   * Show the start menu
+   * 
+   */
   menu() {
     this.stageG.erase();
     this.stageG.context.fillStyle = '#000000';
@@ -38,6 +47,10 @@ class Game {
     
   }
   
+  /**
+   * Run the game, valide countdown 
+   * 
+   */ 
   run() {
     if (Game.instance.runner === true) {
       Game.instance.stageG.erase();
@@ -57,8 +70,17 @@ class Game {
     }
   }
   
+  /**
+   * Start the game, in this fuction all 
+   * 
+   */
   start() {
     
+    if (this.countdown < 30) {
+      this.countdown = 30;
+    }
+    
+    this.score = 0;
     this.stageG.clear();
     // Reduce the countdown timer ever second
     this.interval = setInterval(function() {
@@ -67,27 +89,24 @@ class Game {
     
     // Stop listening for click events
 //    console.debug(this.stageG);
-    this.stageG.context.canvas.removeEventListener('click', this.start);
-
-//    this.eventKeys();
-    // Put the target at a random starting point
-//    moveTarget();
-    // Kick off the draw loop
-    
+//    this.stageG.context.canvas.removeEventListener('click', this.start);
+    this.stageG.context.canvas.removeEventListener('click', function(event) {
+//      event.preventDefault();
+      Game.instance.start();
+    });
+    //Call class Factory
     var factory = new Factory();
-    
+    //Call class Mediator
     var mediator = new Mediator();
-    
-    
-    
+            
     const gamer1  = factory.createBall(this.stageG, 'gamer' );
     mediator.register(gamer1);
     gamer1.subscribe(Game.instance);
     
-    var ballFoods = factory.createBalls(this.stageG, 'food', 20);
+    var ballFoods = factory.createBalls(this.stageG, 'food', 30);
     mediator.registerMany(ballFoods);
     
-    var ballEnemys = factory.createBalls(this.stageG, 'enemy', 10);
+    var ballEnemys = factory.createBalls(this.stageG, 'enemy', 20);
     mediator.registerMany(ballEnemys);
     
     this.mediator = mediator;
@@ -104,21 +123,30 @@ class Game {
 
   }
   
+  /**
+   * End the game, clear stage.
+   * 
+   */
   end() {
-    
-    this.runner = false;
-    console.debug('In End');
+    console.debug('In The End');
 	// Stop the countdown
-    clearInterval(this.interval);
+    clearInterval(Game.instance.interval);
     // Display the final score
-    this.stageG.erase();
-    this.stageG.context.fillStyle = '#000000';
-    this.stageG.context.font = '24px Arial';
-    this.stageG.context.textAlign = 'center';
-    this.stageG.context.fillText('Final Score: ' + this.score, this.stageG.width / 2, this.stageG.height / 2);
+    Game.instance.stageG.erase();
+    Game.instance.stageG.context.fillStyle = '#000000';
+    Game.instance.stageG.context.font = '24px Arial';
+    Game.instance.stageG.context.textAlign = 'center';
+    
+    if (Game.instance.score < 0){
+      Game.instance.stageG.context.fillText('You lose - Fatality ', Game.instance.stageG.width / 2, Game.instance.stageG.height / 2);
+    } else {
+      Game.instance.stageG.context.fillText('Final Score: ' + Game.instance.score, Game.instance.stageG.width / 2, Game.instance.stageG.height / 2);
+    }
   }
   
-  
+  /*
+   * Draw all ball at the stage
+   */
   draw() {
 
     var iterBalls = new Iterator(this.mediator.participants);
@@ -135,6 +163,12 @@ class Game {
     
   }
   
+  /**
+   * Get notification from BallGamer partten Observer
+   * @param {Ball} ball
+   * @param {string} acction
+   * 
+   */
   notify(ball, acction) {
     
     if (acction === 'add') {
@@ -144,7 +178,8 @@ class Game {
       
       if (ball.radius <= 2) {
         console.log('End');
-        this.end();
+        this.runner = false;
+        setTimeout(this.end, 300);
       }
       
     }

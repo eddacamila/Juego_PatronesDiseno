@@ -1,26 +1,54 @@
+/**
+ * Pattern Iterator
+ * 
+ */
 class Iterator {
+  /**
+   * 
+   * @param {Array} items
+   * @returns {Iterator}
+   */
   constructor(items) {
     this.index = 0;
     this.items = items;
   }
   
+  /**
+   * Get the first item from array
+   * @returns {Array}
+   */
   first () {
     this.reset();
     return this.next();
   }
   
+  /**
+   * Get the next item from array
+   * @returns {Array}
+   */
   next() {
     return this.items[this.index++];
   }
   
+  /**
+   * Validate value to index, Never should be maJor to length
+   * @returns {Boolean}
+   */
   hasNext() {
     return this.index <= this.items.length;
   }
-        
+  
+  /**
+   * Reset index
+   */
   reset() {
     this.index = 0;
   }
   
+  /**
+   * Loop for all Array
+   * @param {array} callback
+   */
   each(callback) {
     for (var item = this.first(); this.hasNext(); item = this.next()) {
       callback(item);
@@ -28,35 +56,3 @@ class Iterator {
   }
   
 }
-
-
-     
-    // log helper
-     
-    var log = (function() {
-        var log = "";
-        return {
-            add: function(msg) { log += msg + "\n"; },
-            show: function() { alert(log); log = ""; }
-        }
-    })();
-     
-    function runIter() {
-        var items = ["one", 2, "circle", true, "Applepie"];
-        var iter = new Iterator(items);
-     
-        // using for loop
-     
-        for (var item = iter.first(); iter.hasNext(); item = iter.next()) {
-            log.add(item);
-        }
-        log.add("");
-     
-        // using Iterator's each method
-     
-        iter.each(function(item) {
-            log.add(item);
-        });
-     
-        log.show();
-    }

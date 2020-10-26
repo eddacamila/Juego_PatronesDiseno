@@ -1,23 +1,49 @@
 class BallGamer extends Ball {
+  /**
+   * 
+   * @param {Stage} stageB
+   * @param {object{x,y}} speed
+   * @param {string} color
+   * @param {int} radius
+   * @returns {BallGamer}
+   */
   constructor(stageB, speed, color , radius) {
     super(stageB, speed, color , radius); 
     this.observers = [];
   }
   
+  /**
+   * Set a new observer to observers
+   * @param {object} c
+   */
   subscribe( c ){
     this.observers.push(c);
   }
   
+  /**
+   * Remove observer to observers
+   * @param {object} c
+   */
   unsubscribe( c ) {
       this.observers = this.observers.filter(observer => observer instanceof c !== true);
   }
   
-  notify(ball, acction) {
+  /**
+   * Set a notifiaction all  to observers
+   * @param {object} ball
+   * @param {string} action
+   */
+  notify(ball, action) {
       this.observers.forEach(observer => {
-          observer.notify(ball, acction);
+          observer.notify(ball, action);
       });
   }
   
+  /**
+   * Get a key down event and set the direction to the ball
+   * @param {Number event} direction
+   * 
+   */
   move (direction) {
 
     // Move the square
@@ -57,6 +83,5 @@ class BallGamer extends Ball {
       
     }
   }
-  
 
 }

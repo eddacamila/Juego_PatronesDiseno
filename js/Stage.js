@@ -1,5 +1,12 @@
 // Class stage
 class Stage {
+  /**
+   * 
+   * @param {strng} id
+   * @param {int} width
+   * @param {int} height
+   * @returns {Stage}
+   */
   constructor(id, width, height) {
 
     this.context = document.getElementById(id).getContext('2d');

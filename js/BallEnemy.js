@@ -1,8 +1,19 @@
 class BallEnemy extends Ball {
+    /**
+   * 
+   * @param {Stage} stageB
+   * @param {object{x,y}} speed
+   * @param {string} color
+   * @param {int} radius
+   * @returns {BallGamer}
+   */
   constructor(stageB, speed, color , radius) {
     super(stageB, speed, color , radius); 
   }
   
+  /**
+   * Move the ball diagonally
+   */
   move () {
     
     if (this.x >= this.stageB.width || this.x <= 0){
