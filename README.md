@@ -394,10 +394,14 @@ class Game {...
 
 ## Bibliografía :green_book:
 [1]https://anexsoft.com/patron-observador-con-javascript-observer-pattern
+
+
 [2] https://www.dofactory.com/javascript/design-patterns
 
 
 ## Autores ✒️
 
 Edda Camila Rodrigez - 20202099033 :woman:
+
+
 Néstor Camilo Beltrán - 20202099021 :older_man:
