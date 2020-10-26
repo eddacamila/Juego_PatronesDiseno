@@ -1,6 +1,6 @@
-# Fat Ball o Monstruo come circulos. :basketball:
+# Fat Ball o Monstruo come círculos. :basketball:
 Ejemplo de aplicación de patrones de diseño a un juego muy básico.
-En este juego encontramos los siguientes patrones de diseño:
+
 ## Contexto del Juego
 Con esta sencilla aplicación de Javascript, te enfrentas a otros monstruos come circulos. La regla es que si tienes un tamaño mayor que el circulo con el que chocas, eres el depredador, pero si es al reves eres la presa de ese depredador. La regla es: te comes a los más pequeños que tú, pero los más grandes que tú tienen derecho a comerte. En este caso usaras las teclas para moverte.
 ## Código general-imagen de contexto
@@ -9,6 +9,8 @@ Con esta sencilla aplicación de Javascript, te enfrentas a otros monstruos come
 
 ![Diagrama Clases-JuegoComeCirculos](imagenes/DiagramaClasesJuegoPython-DiagramaFinal.png)
 
+
+En este juego encontramos los siguientes patrones de diseño:
 ## 1. Patrón Observer :eyes:
 Observa los **cambios de estado** que tenga un **sujeto u objeto** para notificar sus suscripciones.
 Para este juego el objeto **BallFood** (Bola-comida) **se suscribe a las BallGamer**(Bola del jugador).  
