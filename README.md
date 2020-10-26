@@ -184,28 +184,218 @@ class Mediator {
   
 }
 ```
-**2. En la clase game:
+**2. En la clase game:**
+```
+class Game {
+....
+//Call class Mediator
+    var mediator = new Mediator();
+            
+    const gamer1  = factory.createBall(this.stageG, 'gamer' );
+    mediator.register(gamer1);
+    gamer1.subscribe(Game.instance);
+    
+    var ballFoods = factory.createBalls(this.stageG, 'food', 30);
+    mediator.registerMany(ballFoods);
+    
+    var ballEnemys = factory.createBalls(this.stageG, 'enemy', 20);
+    mediator.registerMany(ballEnemys);
+    
+    this.mediator = mediator;
+   
+```
+
 ### Diagrama Patrón Mediator
 
 ![Diagrama Clases-Mediator](imagenes/DiagramaClasesJuegoPython-Mediador.png)
 
-## 4. Patrón FactoryMethod :speech_balloon:
-Informa el score desde el mediador, que seria la clase **BallGame** a la clase **Game** para que esta presente la información.
+## 4. Patrón FactoryMethod :factory:
+Este patrón crea nuevos objetos de cada una de las bolas del juego: **BallEnemy, BallFood, BallGamer".** Es importante subrayar que el objetivo clave del método Factory es la extensibilidad. Los métodos de fábrica se utilizan con frecuencia en aplicaciones que manipulan colecciones de objetos que son diferentes pero que al mismo tiempo tienen muchas características (es decir, métodos y propiedades) en común[2].
+
+Para implementar este patrón, se creo una clase independiente denominada Factory y es llamada en Game, creando los tipos de objetos que se necesitan para jugar.  
+
 ### Según esto tenemos en el código:
+**1. Clase Factory**
+```
+/**
+ * Implement to pattern Factory
+ * 
+ */
+class Factory {
+  
+  /**
+   * Created Ball by the type
+   * @param {Stage} stage
+   * @param {string} type
+   * @returns {BallFood|BallGamer|BallEnemy|Factory.createBall.ball}
+   */
+  createBall (stage, type ) 
+  {
+    var ball;
+
+    if (type === "gamer") {
+      ball = new BallGamer(stage, {x:3,y:3}, '#FF0000', 4);
+    } else if (type === "food") {
+      ball = new BallFood(stage, {x:0,y:0}, '#00FF00',  2);
+    } else if (type === "enemy") {
+      ball = new BallEnemy(stage, {x:2,y:2}, '#0000FF',  5);
+    } 
+    
+    ball.type = type;
+    
+    return ball;
+  }
+  
+  /**
+   * Created Array Ball by the type, max the num
+   * @param {Stage} stage
+   * @param {string} type
+   * @param {int} num
+   * @returns {Array|Factory.createBalls.balls}
+   */
+  createBalls (stage, type, num = 1 ) 
+  {
+    var balls = [];
+    
+    for (var j = 0; j < num; j++ ) {
+      
+      var ball = this.createBall (stage, type); 
+      balls.push(ball);
+
+    }
+        
+    return balls;
+  }
+  
+  
+}
+
+
+```
+
+**1. En Clase Game**
+```
+class Game {...
+    //Call class Factory
+    var factory = new Factory();
+    //Call class Mediator
+    var mediator = new Mediator();
+            
+    const gamer1  = factory.createBall(this.stageG, 'gamer' );
+    mediator.register(gamer1);
+    gamer1.subscribe(Game.instance);
+    
+    var ballFoods = factory.createBalls(this.stageG, 'food', 30);
+    mediator.registerMany(ballFoods);
+    
+    var ballEnemys = factory.createBalls(this.stageG, 'enemy', 20);
+    mediator.registerMany(ballEnemys);
+    
+    this.mediator = mediator;
+}
+```
 
 ### Diagrama Patrón Factory Method
 ![Diagrama Clases-FactoryMethod](imagenes/DiagramaClasesJuegoPython-FactoryMethod.png)
 
-## 5. Patrón Iterator :speech_balloon:
-Informa el score desde el mediador, que seria la clase **BallGame** a la clase **Game** para que esta presente la información.
-### Según esto tenemos en el código:
+## 5. Patrón Iterator :recycle:
+Este patrón se utiliza para dibujar las collecciones de objetos asociados a los tipos de bola: **BallGame, BallFood, BallEnemy** . Entonces, este patrón de iterador permite recorrer de manera efectiva una colección de objetos, que son los tipos de bola para dibujarlos en el lienzo, comunicando esto por medio del mediador al **Game**. Para la implementación se creo una clase Iterator que se llama en Game, específicamente en la función draw().
 
+El patrón Iterator permite a los desarrolladores de JavaScript diseñar construcciones de bucle que son mucho más flexibles y sofisticadas.
+### Según esto tenemos en el código:
+**1. En Clase Iterator**
+```
+/**
+ * Pattern Iterator
+ * 
+ */
+class Iterator {
+  /**
+   * 
+   * @param {Array} items
+   * @returns {Iterator}
+   */
+  constructor(items) {
+    this.index = 0;
+    this.items = items;
+  }
+  
+  /**
+   * Get the first item from array
+   * @returns {Array}
+   */
+  first () {
+    this.reset();
+    return this.next();
+  }
+  
+  /**
+   * Get the next item from array
+   * @returns {Array}
+   */
+  next() {
+    return this.items[this.index++];
+  }
+  
+  /**
+   * Validate value to index, Never should be maJor to length
+   * @returns {Boolean}
+   */
+  hasNext() {
+    return this.index <= this.items.length;
+  }
+  
+  /**
+   * Reset index
+   */
+  reset() {
+    this.index = 0;
+  }
+  
+  /**
+   * Loop for all Array
+   * @param {array} callback
+   */
+  each(callback) {
+    for (var item = this.first(); this.hasNext(); item = this.next()) {
+      callback(item);
+    }
+  }
+  
+}
+```
+**2. En Clase Game**
+```
+class Game {...
+ * Draw all ball at the stage
+   */
+  draw() {
+
+    var iterBalls = new Iterator(this.mediator.participants);
+    
+    iterBalls.each(function(ball) {
+      
+      if (ball.type === 'enemy') {
+        ball.move();
+      }
+      
+      ball.report(ball.x, ball.y);
+      ball.draw();
+    }, this);
+    
+  }
+  
+  
+}
+```
 ### Diagrama Patrón Iterator
 
 ![Diagrama Clases-Iterator](imagenes/DiagramaClasesJuegoPython-Iterador.png)
 
 ## Bibliografía :green_book:
-https://anexsoft.com/patron-observador-con-javascript-observer-pattern
+[1]https://anexsoft.com/patron-observador-con-javascript-observer-pattern
+[2] https://www.dofactory.com/javascript/design-patterns
+
 
 ## Autores ✒️
 
