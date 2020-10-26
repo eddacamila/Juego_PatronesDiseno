@@ -31,13 +31,17 @@ class Ball {
       if (this.type === 'enemy' && from.type === 'enemy') {
         this.speed.x *= -1;
         this.speed.y *= -1;
-        this.color = '#000000';
+        this.color = this.getRandomColor();
+        from.speed.y *= -1;
+        from.speed.y *= -1;
+        from.color = this.getRandomColor();
       }
       
       if (this.type === 'gamer' && from.type === 'food') {
         
         from.moveRandom();
         this.radius++;
+        this.notify(this, 'add');
       }
       
 //      if (this.type === 'food' && from.type === 'gamer') {
@@ -50,12 +54,39 @@ class Ball {
       if (this.type === 'gamer' && from.type === 'enemy') {
         
 //        this.moveRandom();
-        if (this.radius >= from.radius) {
+        if (this.radius >= 2) {
           this.radius--;
           from.speed.x *= -1;
           from.speed.y *= -1;
+          from.speed.x ++;
+          from.speed.y ++;
+          this.notify(this, 'sub');
         }
       }
+      
+//      if (this.type === 'enemy' && from.type === 'food') {
+//        
+////        this.moveRandom();
+//          this.radius++;
+//          if (this.radius > 10) {
+//            this.speed.x ++;
+//            this.speed.y ++;
+//          }
+//          from.moveRandom();
+//      }
+      
+//      if (this.type === 'enemy' && from.type === 'gamer') {
+//        
+////        this.moveRandom();
+//        if (from.radius >= 2) {
+//          from.radius--;
+//          this.speed.x ++;
+//          this.speed.y ++;
+//          this.speed.x *= -1;
+//          this.speed.y *= -1;
+//          from.notify(from, 'sub');
+//        }
+//      }
       
       
       // Increase the score
@@ -106,5 +137,13 @@ class Ball {
     this.y = Math.round(Math.random() * (Ymax - min) + min);
     console.debug([this.x, this.y]);
   }
-
+  
+  getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 }

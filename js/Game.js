@@ -82,6 +82,7 @@ class Game {
     
     const gamer1  = factory.createBall(this.stageG, 'gamer' );
     mediator.register(gamer1);
+    gamer1.subscribe(Game.instance);
     
     var ballFoods = factory.createBalls(this.stageG, 'food', 20);
     mediator.registerMany(ballFoods);
@@ -104,6 +105,9 @@ class Game {
   }
   
   end() {
+    
+    this.runner = false;
+    console.debug('In End');
 	// Stop the countdown
     clearInterval(this.interval);
     // Display the final score
@@ -139,6 +143,7 @@ class Game {
       this.score--;
       
       if (ball.radius <= 2) {
+        console.log('End');
         this.end();
       }
       
