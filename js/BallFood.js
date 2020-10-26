@@ -5,23 +5,4 @@ class BallFood extends Ball {
 
   }
   
-  notify(ball) {
-    
-    if (this.collide(ball.x, ball.y, ball.radius)) {
-      // collision detected!
-      // Respawn the target
-      this.draw('#FFFFFF');
-      this.moveRandom();
-      // Increase the score
-//      score++;
-      ball.radius++;
-      this.draw();
-      
-    }
-    
-//    console.log([model.x, model.y, model.radius]);
-
-  }
-
-  
 }

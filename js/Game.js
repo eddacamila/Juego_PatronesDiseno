@@ -6,12 +6,12 @@ class Game {
     this.score = 0;
     this.countdown = countdown;
     this.interval = null;
-    this.gamer = null;
+    this.mediator = null;
     
     if (typeof Game.instance === 'object') {
       return Game.instance;
     }
-
+  
     Game.instance = this;
     
     return this;
@@ -28,57 +28,79 @@ class Game {
     this.stageG.context.fillText('Click to Start', this.stageG.width / 2, this.stageG.height / 2);
     this.stageG.context.font = '18px Arial';
     this.stageG.context.fillText('Use the arrow keys to move', this.stageG.width / 2, (this.stageG.height / 4) * 3);
+  
     // Start the game on a click
-        console.debug(this.stageG);
+//    this.stageG.context.canvas.addEventListener('click', this.start.bind(this), false);
+    this.stageG.context.canvas.addEventListener('click', function(event) {
+      event.preventDefault();
+      Game.instance.start();
+    });
+    
+  }
+  
+  run() {
+    if (Game.instance.runner === true) {
+      Game.instance.stageG.erase();
+      Game.instance.draw();
 
-        console.debug(1);
-    this.stageG.context.canvas.addEventListener('click', this.start);
-        console.debug(this.stageG);
-
-        console.debug(2);
+      Game.instance.stageG.context.fillStyle = '#000000';
+      Game.instance.stageG.context.font = '18px Arial';
+      Game.instance.stageG.context.textAlign = 'left';
+      Game.instance.stageG.context.fillText('Score: ' + Game.instance.score, 10, 24);
+      Game.instance.stageG.context.fillText('Time Remaining: ' + Game.instance.countdown, 10, 50);
+    
+      if (Game.instance.countdown <= 0) {
+        Game.instance.end();
+      } else {
+        window.requestAnimationFrame(Game.instance.run);
+      }
+    }
   }
   
   start() {
-        console.debug(this.stageG);
-        console.debug(3);
-
+    
+    this.stageG.clear();
     // Reduce the countdown timer ever second
     this.interval = setInterval(function() {
-      this.countdown--; 
-    }, 1000);
+      Game.instance.countdown--; 
+    }, 2000);
     
     // Stop listening for click events
-    console.debug(this.stageG);
-//    this.stageG.context.canvas.removeEventListener('click', this.start);
+//    console.debug(this.stageG);
+    this.stageG.context.canvas.removeEventListener('click', this.start);
+
 //    this.eventKeys();
     // Put the target at a random starting point
 //    moveTarget();
     // Kick off the draw loop
     
-    const gamer1  = new BallGamer(this.stageG, 6, '#FF0000', 5);
-    this.gamer = gamer1;
-    gamer1.draw();
-    console.debug(this.gamer);
+    var factory = new Factory();
+    
+    var mediator = new Mediator();
+    
+    
+    
+    const gamer1  = factory.createBall(this.stageG, 'gamer' );
+    mediator.register(gamer1);
+    
+    var ballFoods = factory.createBalls(this.stageG, 'food', 20);
+    mediator.registerMany(ballFoods);
+    
+    var ballEnemys = factory.createBalls(this.stageG, 'enemy', 10);
+    mediator.registerMany(ballEnemys);
+    
+    this.mediator = mediator;
+   
     this.stageG.context.canvas.addEventListener('keydown', function(event) {
       event.preventDefault();
       console.log(event.key, event.keyCode);
-      key = event.keyCode;
       gamer1.move(event.keyCode);
-      gamer1.draw();
-      gamer1.notify(gamer1);
-      //      game();
+
     }, this);
 
-    for (var j = 0; j < 20; j++ ) {
-      const ballFood1 = new BallFood(this.stageG, 6, '#00FF00',  2);
-      this.gamer.subscribe(ballFood1);
-      ballFood1.draw();
-    }
+    this.runner = true;
+    this.run();
 
-//    for (var i = 0; i < 10; i++ ) {
-//      const ballEnemy1 = new BallEnemy(this.stageG, 6, '#0000FF',  6);
-//      ballEnemy1.draw();
-//    }
   }
   
   end() {
@@ -92,24 +114,36 @@ class Game {
     this.stageG.context.fillText('Final Score: ' + this.score, this.stageG.width / 2, this.stageG.height / 2);
   }
   
+  
   draw() {
-//    console.debug(this.gamer.observers);
-    this.gamer.draw();
-      console.debug(this.gamer.observers);
-    this.gamer.observers.forEach(function(ballFood) {
-      ballFood.draw();
+
+    var iterBalls = new Iterator(this.mediator.participants);
+    
+    iterBalls.each(function(ball) {
+      
+      if (ball.type === 'enemy') {
+        ball.move();
+      }
+      
+      ball.report(ball.x, ball.y);
+      ball.draw();
     }, this);
     
   }
-//  eventKeys () {
-//    // Listen for keydown events
-//    this.stageG.context.canvas.addEventListener('keydown', function(event) {
-//      event.preventDefault();
-//      console.log(event.key, event.keyCode);
-//      key = event.keyCode;
-//      //      game();
-//      //      ballGamer1.notify(ballGamer1);
-//    });
-//  }
+  
+  notify(ball, acction) {
+    
+    if (acction === 'add') {
+      this.score++;
+    } else if(acction === 'sub') {
+      this.score--;
+      
+      if (ball.radius <= 2) {
+        this.end();
+      }
+      
+    }
+
+  }
   
 }
