@@ -37,6 +37,21 @@ Informa el score desde el mediador, que seria la clase **BallGame** a la clase *
 
 ![Diagrama Clases-Mediator](imagenes/DiagramaClasesJuegoPython-Mediador.png)
 
+## 4. Patrón FactoryMethod :speech_balloon:
+Informa el score desde el mediador, que seria la clase **BallGame** a la clase **Game** para que esta presente la información.
+### Según esto tenemos en el código:
+
+### Diagrama Patrón Factory Method
+![Diagrama Clases-FactoryMethod](imagenes/DiagramaClasesJuegoPython-FactoryMethod.png)
+
+## 5. Patrón Iterator :speech_balloon:
+Informa el score desde el mediador, que seria la clase **BallGame** a la clase **Game** para que esta presente la información.
+### Según esto tenemos en el código:
+
+### Diagrama Patrón Iterator
+
+![Diagrama Clases-Iterator](imagenes/DiagramaClasesJuegoPython-Iterador.png)
+
 ## Bibliografía :green_book:
 https://anexsoft.com/patron-observador-con-javascript-observer-pattern
 
