@@ -1,9 +1,9 @@
-# Demo Temporal 👽
-
-[Ver ](https://imasdyd.com/Juego_PatronesDiseno/)
 
 # Fat Ball o Monstruo come círculos. :basketball:
 Ejemplo de aplicación de patrones de diseño a un juego básico.
+
+## Demo Temporal 👽
+[Ver Demo ](https://imasdyd.com/Juego_PatronesDiseno/)
 
 ## Contexto del Juego
 Con esta sencilla aplicación de Javascript apoyado de canvas queremos simular una aproximación al juego agar.io
